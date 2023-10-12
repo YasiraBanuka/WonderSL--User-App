@@ -12,16 +12,23 @@ class ChatHome extends StatefulWidget {
 }
 
 class _ChatHomeState extends State<ChatHome> {
-  // instance of auth
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF7F7F7),
       appBar: AppBar(
-        title: Text('Chat Home Page'),
+        backgroundColor: Color(0xFFF7F7F7),
+        title: Text(
+          'Chat Home Page',
+          style: TextStyle(
+            color: Color(0xFF323232),
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         automaticallyImplyLeading: false,
+        elevation: 0,
       ),
       body: _buildAgentList(),
       bottomNavigationBar: const bottomNavigationBar(),
@@ -57,7 +64,10 @@ class _ChatHomeState extends State<ChatHome> {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text('loading.....');
+          return Padding(
+            padding: const EdgeInsets.only(top: 10.0, left: 10.0),
+            child: const Text('loading.....'),
+          );
         }
 
         return ListView(
@@ -71,23 +81,87 @@ class _ChatHomeState extends State<ChatHome> {
 
   // build individual agent list item
   Widget _buildAgentListItem(DocumentSnapshot document) {
-    Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
-    // display all agents
-    return ListTile(
-      title: Text(data['a_email']),
+    // Get the first letter of the agent's name
+    String agentName = data['a_name'];
+    String firstLetter = agentName[0];
+
+    // Define the image container
+    Container imageContainer = Container(
+      width: 45,
+      height: 45,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.blue, // image container color
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        firstLetter,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+
+    // Return the entire agent list item with image to the left
+    return InkWell(
       onTap: () {
-        // pass the clicked agent's UID to that page
+        // Navigate to the chat page with agent details
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => ChatPage(
               agentEmail: data['a_email'],
               agentId: data['aid'],
+              agentName: data['a_name'],
             ),
           ),
         );
       },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        margin: EdgeInsets.only(
+            top: 20.0,
+            bottom: 0,
+            left: 20.0,
+            right: 20.0), // Add margin for spacing between agents
+        padding: EdgeInsets.all(15), // Add padding inside the container
+        child: Row(
+          children: [
+            // Display the image container to the left
+            imageContainer,
+            SizedBox(width: 16), // Add spacing between the image and text
+            // Display agent name
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  data['a_name'],
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16.0,
+                  ),
+                ),
+                Text(
+                  data['a_email'],
+                  style: TextStyle(
+                    color: Colors.black45,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14.0,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -7,10 +7,12 @@ import 'package:wondersl/services/chat/chat_service.dart';
 class ChatPage extends StatefulWidget {
   final String agentEmail;
   final String agentId;
+  final String agentName;
   const ChatPage({
     super.key,
     required this.agentEmail,
     required this.agentId,
+    required this.agentName,
   });
 
   @override
@@ -34,17 +36,61 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.agentEmail)),
-      body: Column(
-        children: [
-          // messages
-          Expanded(
-            child: _buildMessageList(),
+      appBar: AppBar(
+        backgroundColor: Color(0xFFF7F7F7),
+        title: Column(
+          children: [
+            Text(
+              widget.agentName,
+              style: TextStyle(
+                color: Color(0xFF323232),
+                fontSize: 18.0,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.circle,
+                  color: Colors.green,
+                  size: 10,
+                ),
+                SizedBox(width: 5),
+                Text(
+                  'Online',
+                  style: TextStyle(
+                    color: Color(0XFF323232),
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+        iconTheme: IconThemeData(color: Color(0xFF323232)),
+        // centerTitle: true,
+        elevation: 0,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
           ),
+        ),
+        child: Column(
+          children: [
+            // messages
+            Expanded(
+              child: _buildMessageList(),
+            ),
 
-          // user input
-          _buildMessageInput(),
-        ],
+            // user input
+            _buildMessageInput(),
+          ],
+        ),
       ),
     );
   }
@@ -76,31 +122,52 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
-    // align the messages to the right if the sender is the current user, otherwise to the left
-    var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
-        ? Alignment.centerRight
-        : Alignment.centerLeft;
+    // Determine if the message was sent by the current user
+    bool isSentMessage = (data['senderId'] == _firebaseAuth.currentUser!.uid);
+
+    // Define colors for sent and received messages
+    Color sentMessageColor = Color(0xFF008FA0).withOpacity(0.2);
+    Color receivedMessageColor = Color.fromARGB(224, 204, 222, 255);
+
+    // Determine the background color for the message container
+    Color messageBackgroundColor =
+        isSentMessage ? sentMessageColor : receivedMessageColor;
 
     return Container(
-      alignment: alignment,
+      alignment: isSentMessage ? Alignment.centerRight : Alignment.centerLeft,
       child: Padding(
         padding: const EdgeInsets.only(
-            top: 10.0, bottom: 10.0, left: 10.0, right: 20.0),
+          top: 10.0,
+          bottom: 10.0,
+          left: 20.0,
+          right: 20.0,
+        ),
         child: Column(
           crossAxisAlignment:
-              (data['senderId'] == _firebaseAuth.currentUser!.uid)
-                  ? CrossAxisAlignment.end
-                  : CrossAxisAlignment.start,
+              isSentMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           mainAxisAlignment:
-              (data['senderId'] == _firebaseAuth.currentUser!.uid)
-                  ? MainAxisAlignment.end
-                  : MainAxisAlignment.start,
+              isSentMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
           children: [
             Text(data['senderEmail']),
             const SizedBox(
               height: 5,
             ),
-            ChatBubble(message: data['message']),
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: messageBackgroundColor,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                    bottomLeft: isSentMessage
+                        ? Radius.circular(20)
+                        : Radius.circular(0),
+                    bottomRight: isSentMessage
+                        ? Radius.circular(0)
+                        : Radius.circular(20)),
+              ),
+              child: ChatBubble(message: data['message']),
+            ),
           ],
         ),
       ),
@@ -111,10 +178,10 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageInput() {
     return Padding(
       padding: const EdgeInsets.only(
-          top: 10.0, bottom: 10.0, right: 20.0, left: 20.0),
+          top: 10.0, bottom: 15.0, right: 20.0, left: 20.0),
       child: Material(
         elevation: 5.0,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         child: Container(
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
