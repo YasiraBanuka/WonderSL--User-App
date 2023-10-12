@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "wondersl-chatbot-buba",
+  "private_key_id": "36b57b347d816dbd3335cef705072ac2c6a4fc32",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCwGrHivxI907E3\nfbgcy8WsyCMS/imP9gYp9/GyVWwTNeRriDLCd3bzwF5vRWbgdbjHRrDpcmcPBsjE\nbQkuwt5xY+OSrhJoQttHSTRst4gLsTZi7JgH9vRTMvPuafYbc01Lgt1drgIpgc8l\nPICMY+8LTm+LfYCP74qZwIM01Jf+xV9Q5jCLLwAGdkAEEauAXiX5QD20RNFSRIPO\ni7Rqdr0ROftgLIel8Qv/o3xXF+I9OJrDFEl/exzZNE75oAd5nGYfeFQESfGc7LVk\nRveOu4ah01vc37xrEcSoO0B2U0C2x8PJg/F2HfM/8PBQtIT10x97tZShd+UBNv6k\nGs+/3OsrAgMBAAECggEADHOZaqC7mknas249CN2IQ2W+mSFbG0s4IgUz0+SsqL+8\nQArYGp5AzQ5SfwfyCg040e+Xzax281M1pIctyYkiGklc9hTpx0ZxjlzziyZU77gJ\nfOghUxrX0/7RIY/gxLhxLtV4xR7AbLfkHMwQ2McDcry1MAXhLmGFCXGuX/C83djF\nBVOEHeZHiyHzQ3IiFCd1vEwaI3gZ3qcJ1bMx8zIYyBBZ8jsS27Ig7MZqtWiPHn6q\n2OHmr+/GVzwy6kNSEIkw31fWhE/P7YZlAvslnI77yoidQJd1TQ1ml8yIUtGo0scp\nlwpIHnYNkS5O69alyz6pThp+axzayV17rE0Ly/vcGQKBgQDiDi06i1JsrrLZPujd\nwIuZIGNDo+p/4EN56erFNQb0+3loyrOGOzD+33Dc/bhf2tqnUnVPYEQwtok9AzSQ\nJtunvggQ+zmmPHndxg7bEk6gtHSPQyjNUbYX+gN0hTrG2tshlxm07FgJ0lSfICk2\nDzfY4rHZq/Az4KTeSMC9IZTx2QKBgQDHbp0AH5G61H2FbZm3M8y8r103FDdKvx+E\nQjakcIT87+kkEbqKZLOWL9KYzYyr1+Cibaks3W/wb1HUpE1gOFJzTxEeK0B5V1Cy\nxEi1IM3ai663BlgJafW4Mo1rwf2CGBs0M1MNU47nYV8P8gU/MtIWClgW6O/0oCC0\nX1OfOfueowKBgBl/P9q6nDFmAwY98kYQ0a4T2R5n/qstwG6f07sqn/5B3w/SzSz2\nwC//Q9upQoKNTNxSkKjDUu2rqQ8YrXUU7PGenYpMy9PUPmqlTEepaPT3Za5DBPcj\noEZUDM+3t0l2pgDD6kJd5hA1iRXpqrxOOx5bc3P50L4JOI9Z5WNvxj0BAoGBAMRi\n0IgGjmMETHbP7sbRY5OKvKg4aBpbCpYa/eQASXUqatLyAle1woLqpN+DyjqOYs6Q\nXj+n70s808Ap62gNDmQuQBUNUngq23SuhUqX+x5y3qGsxZS/mxC/9zNd3F33jxJg\nWDCPT/HZmNsC4NfTG75IgWZOC71A0fPMy3PIjVcxAoGBAJO0C6Me2cAebtYRcQVZ\n4YuxWOAoQ3iHtI2gH4RF+3A8INel2/oDFoV1Nm4lDvORc8dsQZzVmXVSSUEpfeKu\n9F/XvZLSma++VozuD2nJthwiiMrdGgkRW5WBlCNViiVm4ylb103qEGHlyjiTKzg2\ngLyGIDI5KZaqXLwNhu9r41sE\n-----END PRIVATE KEY-----\n",
+  "client_email": "wondersl@wondersl-chatbot-buba.iam.gserviceaccount.com",
+  "client_id": "101068077479240653386",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/wondersl%40wondersl-chatbot-buba.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
